@@ -8,13 +8,23 @@
     "@testing-library/user-event": "^7.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-social-login": "^3.4.9"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "betterScripts":{
+    "start":{
+      "env":{
+        "NODE_ENV": "development",
+        "FB_APP_ID": "657319568198782",
+        "INSTAGRAM_REDIRECT": "https://localhost:8080"
+      }
+    }
   },
   "eslintConfig": {
     "extends": "react-app"

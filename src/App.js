@@ -1,8 +1,24 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import SocialButton from './components/SocialButton'
+
+import Demo from './containers/demo'
+import { card as cardStyle, hr as hrStyle } from './utils/styles'
+
 const api = {
   key: "b1da9a235934bb7f93e8b7d460e1ae10",
   base: "https://api.openweathermap.org/data/2.5/"
 }
+
+const handleSocialLogin = (user) => {
+  console.log(user)
+}
+
+const handleSocialLoginFailure = (err) => {
+  console.error(err)
+}
+
+const facebookAppId = '229764898440329';
 
 function App() {
 
@@ -22,19 +38,25 @@ function App() {
   }
 
   const dateBuilder = (d) => {
-    let months = ["January", "February", "March", "April", "May",
-      "June", "July", "August", "September", "October",
-      "November", "December"];
-    let days = ["Sunday", "Monday", "Tuesday", "Wednesday",
-      "Thursday", "Friday", "Saturday"];
+    let months = ["siječanj", "veljača", "ožujak", "travanj", "svibanj",
+      "lipanj", "srpanj", "kolovoz", "rujan", "listopad",
+      "studeni", "prosinac"];
+    let days = ["nedjelja", "ponedjeljak", "utorak", "srijeda",
+      "četvrtak", "petak", "subota"];
     
     let day = days[d.getDay()];
     let date = d.getDate();
     let month = months[d.getMonth()];
     let year = d.getFullYear();
+    let hour = d.getHours();
+    let minute = d.getMinutes();
 
-    return `${day} ${date} ${month} ${year}`
+    if (hour < 10) hour = `0${hour}`
+    if (minute < 10) minute = `0${minute}`
+
+    return `${day}, ${date}. ${month} ${year}. ${hour}:${minute}`
   }
+
   return (
     <div className={
       (typeof weather.main != "undefined")
@@ -71,7 +93,21 @@ function App() {
         ) : ('')}
 
         
-        
+        {/* <div>
+          <SocialButton
+          provider='facebook'
+          appId={facebookAppId}
+          onLoginSuccess={handleSocialLogin}
+          onLoginFailure={handleSocialLoginFailure}
+          >Login With Facebook</SocialButton>
+        </div> */}
+
+        <div style={{ ...cardStyle, padding: '1.5rem 2rem', textAlign: 'center'}}>
+          <strong>Social login</strong>
+          <hr style={hrStyle} />
+          <Demo />
+        </div>
+
       </main>
 
     </div>
